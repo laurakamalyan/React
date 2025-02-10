@@ -1,9 +1,9 @@
 import React from "react";
 
-function Staff({staffItems}) {
+function Staff({children}) {
     return (
         <ul>
-            {staffItems}
+            {children}
         </ul>
     );
 }
