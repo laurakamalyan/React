@@ -1,0 +1,66 @@
+<Input
+                    type="text"
+                    formData={formData.firstname}
+                    handleChange={handleChange}
+                    handleFocus={handleFocus}
+                    handleBlur={handleBlur}
+                    validate={validate}
+                    formErrors={formErrors}
+                    name="firstname"
+                    validateName={validate.validateFirstName}
+                    validateErr={formErrors.firstnameErr}
+                />
+
+
+
+                <Input
+                    type="text"
+                    formData={formData.lastname}
+                    handleChange={handleChange}
+                    handleFocus={handleFocus}
+                    handleBlur={handleBlur}
+                    validate={validate}
+                    formErrors={formErrors}
+                    name="lastname"
+                    validateName={validate.validateLastName}
+                    validateErr={formErrors.lastnameErr}
+                />
+
+                <Input
+                    type="email"
+                    formData={formData.email}
+                    handleChange={handleChange}
+                    handleFocus={handleFocus}
+                    handleBlur={handleBlur}
+                    validate={validate}
+                    formErrors={formErrors}
+                    name="email"
+                    validateName={validate.validateEmail}
+                    validateErr={formErrors.emailErr}
+                />
+
+                <Input
+                    type="password"
+                    formData={formData.password}
+                    handleChange={handleChange}
+                    handleFocus={handleFocus}
+                    handleBlur={handleBlur}
+                    validate={validate}
+                    formErrors={formErrors}
+                    name="password"
+                    validateName={validate.validatePassword}
+                    validateErr={formErrors.passwordErr}
+                />
+
+                <Input
+                    type="password"
+                    formData={formData.rePassword}
+                    handleChange={handleChange}
+                    handleFocus={handleFocus}
+                    handleBlur={handleBlur}
+                    validate={validate}
+                    formErrors={formErrors}
+                    name="rePassword"
+                    validateName={validate.validateRePassword}
+                    validateErr={formErrors.rePasswordErr}
+                />

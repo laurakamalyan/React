@@ -15,3 +15,17 @@
 #dynamicRoot button {
   margin-right: 5px;
 }
+
+.formValidation {
+  text-align: center;
+}
+
+form > div {
+  margin: 10px;
+}
+
+.err {
+  font-style: italic;
+  color: red;
+  font-size: 12px;
+}
