@@ -1,7 +1,6 @@
 import React from "react";
 
-function Input({type, name, validateName, validateErr,
-                   formData, handleFocus, handleChange, handleBlur}) {
+function Input({type, name, validateErr, formData, handleFocus, handleChange, handleBlur}) {
     return (
         <div>
             <label htmlFor={name}> {name} </label>
@@ -15,7 +14,7 @@ function Input({type, name, validateName, validateErr,
                 onBlur={handleBlur}
             />
             <p className="err">
-                {!validateName ? validateErr : ''}
+                {validateErr}
             </p>
         </div>
     )
