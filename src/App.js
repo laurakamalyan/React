@@ -1,10 +1,10 @@
 import './App.css';
-import ValidationForm from "./components/ValidationForm";
+import Routers from "./components/Routers";
 
 
 function App() {
     return (
-        <ValidationForm></ValidationForm>
+        <Routers />
     );
 }
 

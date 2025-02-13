@@ -29,3 +29,7 @@ form > div {
   color: red;
   font-size: 12px;
 }
+
+.activeLink {
+  color: red;
+}
