@@ -46,13 +46,7 @@ function Routers() {
                     </ul>
                 </nav>
 
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/about" element={<About />}>
-                        <Route path="nested" element={<AboutNestedRouter />} />
-                    </Route>
-                    <Route path="/contact/:id" element={<Contact />} />
-                </Routes>
+                <Routes />
             </BrowserRouter>
         </>
     )
