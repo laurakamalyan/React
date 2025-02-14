@@ -1,54 +1,69 @@
 import './App.css';
-import React, {useCallback, useEffect, useState} from 'react';
-
-import {useDispatch, useSelector} from "react-redux";
-import login from './actions/action'
+import axios from "axios";
+import {useEffect, useState} from "react";
+import Movie from "./components/Movie";
 
 function App() {
-    const users = [
-        { email: "ann@mail.ru", password: "pass" },
-        { email: "john@mail.ru", password: "pass" },
-        { email: "tom@mail.ru", password: "pass" },
-    ];
+    const API_KEY = '7620a7d50441d1251d05be7d17f26294';
+    const BASE_URL = 'https://api.themoviedb.org/3';
+    const [movies, setMovies] = useState([]);
+    const [pages, setPages] = useState();
+    let pagesArray = [];
+    const [currentPage, setCurrentPage] = useState(1);
 
-    const [user, setUser] = useState({
-        email: "",
-        password: "",
-    });
-
-    const dispatch = useDispatch();
-    const loginUser = useSelector(state => state.user);
-
-    const handleChange = useCallback((e) => {
-        const {name, value} = e.target;
-        setUser({
-            ...user,
-            [name]: value,
-        });
-    }, [user]);
-
-    const handleLogin = (e) => {
-        e.preventDefault();
-
-        const isUserFound = users.some(u => u.email === user.email && u.password === user.password);
-        if (isUserFound) {
-            dispatch(login(user));
-        } else {
-            console.log("User don't found!");
-        }
-    };
+    async function getMovies(p) {
+        await axios.get(`${BASE_URL}/movie/popular?api_key=${API_KEY}&page=${p}`)
+            .then(response => {
+                setMovies(response.data.results);
+                let pagesCount = response.data.total_pages / 20;
+                setPages(pagesCount);
+            });
+    }
 
     useEffect(() => {
-        console.log(loginUser);
-    }, [loginUser])
+        getMovies(currentPage);
+    }, [currentPage]);
+
+    let startPage = 1;
+    let endPage = 5;
+    if (currentPage > 2) {
+        if (currentPage === pages) {
+            startPage = currentPage - 5;
+            endPage = pages;
+        } else {
+            startPage = currentPage - 2;
+            endPage = currentPage + 2;
+        }
+    }
+
+    for (let i = startPage; i < endPage + 1; i++) {
+        pagesArray.push(i);
+    }
 
     return (
-        <form>
-            <input type="email" name="email" placeholder="Email" onChange={handleChange}/> <br/>
-            <input type="password" name="password" placeholder="Password" onChange={handleChange}/> <br/>
-            <button onClick={handleLogin}>Log In</button>
-        </form>
-    );
+        <>
+            <div className="movies">
+                {
+                    movies.map(movie => {
+                        return (
+                            <Movie key={movie.id} movie={movie}/>
+                        )
+                    })
+                }
+            </div>
+
+            <div className="pages">
+                {
+                    pagesArray.map((page, index) => {
+                        return (
+                            <button key={index} onClick={() => setCurrentPage(page)}>{page}</button>
+                        )
+                    })
+                }
+            </div>
+
+        </>
+    )
 }
 
 export default App;
