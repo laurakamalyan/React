@@ -1,6 +1,6 @@
-const action = (index) => ({
-    type: 'show',
-    payload: index,
+const login = (user) => ({
+    type: 'login',
+    payload: user,
 })
 
-export default action;
+export default login;
