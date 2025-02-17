@@ -1,22 +1,18 @@
 import './App.css';
-import axios from "axios";
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import Movie from "./components/Movie";
+import {$axios} from "./plugins/axios"
 
 function App() {
-    const API_KEY = process.env.REACT_APP_API_KEY;
-    const BASE_URL = process.env.REACT_APP_BASE_URL;
-
     const [movies, setMovies] = useState([]);
     const [pages, setPages] = useState();
     let pagesArray = [];
     const [currentPage, setCurrentPage] = useState(1);
 
-    async function getMovies(p) {
-        await axios.get(`${BASE_URL}/movie/popular?api_key=${API_KEY}&page=${p}`)
+    async function getMovies() {
+        await $axios.get(`/movie/popular?api_key=${process.env.REACT_APP_API_KEY}&page=${currentPage}`)
             .then(response => {
                 setMovies(response.data.results);
-                console.log(response.data);
 
                 let pagesCount = response.data.total_pages;
                 setPages(pagesCount);
@@ -24,7 +20,7 @@ function App() {
     }
 
     useEffect(() => {
-        getMovies(currentPage);
+        getMovies();
     }, [currentPage]);
 
     let startPage = 1;

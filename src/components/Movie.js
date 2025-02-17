@@ -1,8 +1,8 @@
 import React from "react";
 
 function Movie({movie}) {
-    const imagePath = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`;
-    const backdropPath = `https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`;
+    const imagePath = `${process.env.REACT_APP_BASE_PATH}/${movie.poster_path}`;
+    const backdropPath = `${process.env.REACT_APP_BASE_PATH}/${movie.backdrop_path}`;
     return (
         <div>
             <a href={backdropPath} target="_blank">
