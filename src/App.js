@@ -4,8 +4,9 @@ import {useEffect, useState} from "react";
 import Movie from "./components/Movie";
 
 function App() {
-    const API_KEY = '7620a7d50441d1251d05be7d17f26294';
-    const BASE_URL = 'https://api.themoviedb.org/3';
+    const API_KEY = process.env.REACT_APP_API_KEY;
+    const BASE_URL = process.env.REACT_APP_BASE_URL;
+
     const [movies, setMovies] = useState([]);
     const [pages, setPages] = useState();
     let pagesArray = [];
@@ -15,7 +16,9 @@ function App() {
         await axios.get(`${BASE_URL}/movie/popular?api_key=${API_KEY}&page=${p}`)
             .then(response => {
                 setMovies(response.data.results);
-                let pagesCount = response.data.total_pages / 20;
+                console.log(response.data);
+
+                let pagesCount = response.data.total_pages;
                 setPages(pagesCount);
             });
     }
