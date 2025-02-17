@@ -1,6 +1,10 @@
-import {createStore} from 'redux'
-import reducer from '../reducers/reduce.js'
+import {configureStore} from "@reduxjs/toolkit";
+import loginReducer from "../slice/loginSlice"
 
-const store = createStore(reducer);
+const store = configureStore({
+    reducer: {
+        login: loginReducer,
+    }
+});
 
 export default store;

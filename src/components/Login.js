@@ -1,6 +1,6 @@
 import {useCallback, useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {loginUserReduce} from "../slice/slice.js"
+import {loginUserReduce} from "../slice/loginSlice.js"
 
 function Login() {
     const users = [
@@ -15,7 +15,7 @@ function Login() {
     });
 
     const dispatch = useDispatch();
-    const loginUser = useSelector(state => state.user);
+    const loginUser = useSelector(state => state.login.user);
 
     const handleChange = useCallback((e) => {
         const {name, value} = e.target;
@@ -30,14 +30,16 @@ function Login() {
 
         const isUserFound = users.some(u => u.email === user.email && u.password === user.password);
         if (isUserFound) {
-            dispatch(loginUserReduce({user}));
+            dispatch(loginUserReduce(user));
         } else {
             console.log("User don't found!");
         }
     };
 
     useEffect(() => {
-        console.log(loginUser);
+        if (loginUser) {
+            console.log(loginUser);
+        }
     }, [loginUser])
 
     return (
