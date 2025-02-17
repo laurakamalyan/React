@@ -31,7 +31,6 @@ function Login() {
         const isUserFound = users.some(u => u.email === user.email && u.password === user.password);
         if (isUserFound) {
             dispatch(loginUserReduce({user}));
-            console.log(user);
         } else {
             console.log("User don't found!");
         }
