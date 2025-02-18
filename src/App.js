@@ -1,34 +1,29 @@
 import './App.css';
-import {useCallback, useEffect, useState} from "react";
+import { useEffect, useState} from "react";
 import Movie from "./components/Movie";
-import {$axios} from "./plugins/axios"
+import {getMovies} from "./slice/moviesSlice";
+import {useDispatch, useSelector} from "react-redux";
+
+// store-ov sarqi zaprost vor tenc componenti mijic zapros chanes,
+// routeneri hamar el mi hat arandzin file sarqi orinak api.js u ira mej granci routenerd
 
 function App() {
-    const [movies, setMovies] = useState([]);
-    const [pages, setPages] = useState();
     let pagesArray = [];
     const [currentPage, setCurrentPage] = useState(1);
+    const dispatch = useDispatch();
 
-    async function getMovies() {
-        await $axios.get(`/movie/popular?api_key=${process.env.REACT_APP_API_KEY}&page=${currentPage}`)
-            .then(response => {
-                setMovies(response.data.results);
-
-                let pagesCount = response.data.total_pages;
-                setPages(pagesCount);
-            });
-    }
+    const {movies, loading, error, totalPage} = useSelector(state => state.movies);
 
     useEffect(() => {
-        getMovies();
+        dispatch(getMovies(currentPage));
     }, [currentPage]);
 
     let startPage = 1;
     let endPage = 5;
     if (currentPage > 2) {
-        if (currentPage === pages) {
+        if (currentPage === totalPage) {
             startPage = currentPage - 5;
-            endPage = pages;
+            endPage = totalPage;
         } else {
             startPage = currentPage - 2;
             endPage = currentPage + 2;
@@ -38,6 +33,9 @@ function App() {
     for (let i = startPage; i < endPage + 1; i++) {
         pagesArray.push(i);
     }
+
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error: {error}</p>;
 
     return (
         <>
