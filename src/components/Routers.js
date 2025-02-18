@@ -1,10 +1,7 @@
 import React from "react";
-import {BrowserRouter, Route, Routes, Link, NavLink} from "react-router-dom";
-import Home from "./Home";
-import About from "./About";
-import Contact from "./Contact";
-import AboutNestedRouter from "./AboutNestedRouter";
+import {BrowserRouter, Routes, NavLink, Route} from "react-router-dom";
 import CurrentLocation from "./CurrentLocation";
+import RoutesPath from "./RoutesPath";
 
 function Routers() {
     const id = 5;
@@ -46,7 +43,7 @@ function Routers() {
                     </ul>
                 </nav>
 
-                <Routes />
+                <RoutesPath />
             </BrowserRouter>
         </>
     )

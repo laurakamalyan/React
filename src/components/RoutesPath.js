@@ -1,11 +1,11 @@
 import React from "react";
-import {Route} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import Home from "./Home";
 import About from "./About";
 import AboutNestedRouter from "./AboutNestedRouter";
 import Contact from "./Contact";
 
-function Routes() {
+function RoutesPath() {
     return (
         <>
             <Routes>
@@ -19,4 +19,4 @@ function Routes() {
     )
 }
 
-export default Routes;
+export default RoutesPath;
